@@ -1,4 +1,7 @@
 #!/bin/bash
+
+source ~/.venv/vllm/bin/activate
+
 HOST="${MODEL_HOST:-127.0.0.1}" 
 vllm serve cyankiwi/Devstral-Small-2-24B-Instruct-2512-AWQ-4bit \
     --tool-call-parser mistral \

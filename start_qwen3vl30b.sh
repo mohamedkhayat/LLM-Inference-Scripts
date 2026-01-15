@@ -12,4 +12,3 @@ vllm serve cyankiwi/Qwen3-VL-30B-A3B-Thinking-AWQ-4bit \
     --gpu-memory-utilization 0.9 \
     --reasoning-parser deepseek_r1 \
     --port 8000 \
-    --kv_cache_dtype "fp8"
