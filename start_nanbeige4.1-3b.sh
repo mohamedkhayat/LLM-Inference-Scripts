@@ -1,0 +1,3 @@
+#!/bin/bash
+HOST="${MODEL_HOST:-127.0.0.1}" 
+~/Apps/llama.cpp/build-b7577/bin/llama-server -m ~/models/Nanbeige/Nanbeige4.1-3B.gguf -ngl 99 -fa on --port 8000 --host "$HOST" --ctx-size 128000 --temp 0.6 --top-p 0.95 --repeat-penalty 1.0 -n 131072
