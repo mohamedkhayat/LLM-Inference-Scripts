@@ -7,7 +7,7 @@ MODEL_PATH="/home/mohamed/models/Nemotron-Orchestrator"
 vllm serve "$MODEL_PATH" \
     --host "$HOST" \
     --max-model-len 64K \
-    --gpu-memory-utilization 0.6 \
+    --gpu-memory-utilization 0.5 \
     --enable-auto-tool-choice \
     --tool-call-parser hermes \
     --reasoning-parser qwen3 \
