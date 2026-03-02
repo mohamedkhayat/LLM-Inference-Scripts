@@ -6,14 +6,12 @@ HOST="${MODEL_HOST:-127.0.0.1}"
     -fa on \
     --port 8000 \
     --host "$HOST" \
-    --ctx-size 131072 \
+    --ctx-size 262144 \
     --context-shift \
-    --batch-size 2048 \
-    --ubatch-size 512 \
     --temp 0.6 \
     --top-p 0.95 \
     --top-k 20 \
     --min-p 0.05 \
     --jinja \
-    --cache-type-k q8_0 \
-    --cache-type-v q8_0
+    --cache-type-k bf16 \
+    --cache-type-v bf16

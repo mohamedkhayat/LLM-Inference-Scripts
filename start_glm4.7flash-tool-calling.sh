@@ -6,7 +6,7 @@ HOST="${MODEL_HOST:-127.0.0.1}"
     -fa on \
     --port 8000 \
     --host "$HOST" \
-    --ctx-size 131072 \
+    --ctx-size 262144 \
     --temp 0.7 \
     --top-p 1.0 \
     --repeat-penalty 1.0 \

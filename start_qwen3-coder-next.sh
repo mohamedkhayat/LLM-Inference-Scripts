@@ -13,8 +13,6 @@ HOST="${MODEL_HOST:-127.0.0.1}"
     --min-p 0.01 \
     --context-shift \
     --top-k 40 \
-    --batch-size 2048 \
-    --ubatch-size 512 \
     --cache-type-k q8_0 \
     --cache-type-v q8_0 \
     --no-mmap \

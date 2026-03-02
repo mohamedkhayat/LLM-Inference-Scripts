@@ -8,8 +8,6 @@ HOST="${MODEL_HOST:-127.0.0.1}"
     --host "$HOST" \
     --context-shift \
     --ctx-size 131072 \
-    --batch-size 2048 \
-    --ubatch-size 512 \
     --temp 0.7 \
     --top-p 0.8 \
     --top-k 20 \
