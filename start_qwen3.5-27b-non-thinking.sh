@@ -1,13 +1,13 @@
 #!/bin/bash
 HOST="${MODEL_HOST:-127.0.0.1}" 
-~/Apps/llama.cpp/build/bin/llama-server -m ~/models/qwen3.5-27b/Qwen3.5-27B-UD-Q6_K_XL.gguf \
-    --mmproj ~/models/qwen3.5-27b/mmproj-BF16.gguf \
+~/Apps/llama.cpp/build/bin/llama-server -m ~/models/Qwen3.5-27B/Qwen3.5-27B-UD-Q4_K_XL.gguf \
+    --mmproj ~/models/Qwen3.5-27B/mmproj-BF16.gguf \
     -ngl 99 \
     -fa on \
     --port 8000 \
     --host "$HOST" \
     --context-shift \
-    --ctx-size 131072 \
+    --ctx-size  262144 \
     --temp 0.7 \
     --top-p 0.8 \
     --top-k 20 \

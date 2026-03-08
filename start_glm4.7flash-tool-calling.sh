@@ -15,4 +15,6 @@ HOST="${MODEL_HOST:-127.0.0.1}"
     --cache-type-v q8_0 \
     --context-shift \
     --batch-size 2048 \
-    --ubatch-size 1024 
+    --ubatch-size 1024 \
+    --threads 16 \
+    --parallel 1

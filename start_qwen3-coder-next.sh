@@ -6,6 +6,8 @@ HOST="${MODEL_HOST:-127.0.0.1}"
     --port 8000 \
     --n-cpu-moe 20 \
     --host "$HOST" \
+    --batch-size 4096 \
+    --ubatch-size 4096 \
     --ctx-size 131072 \
     --alias "unsloth/Qwen3-Coder-Next" \
     --temp 1.0 \
