@@ -4,10 +4,8 @@ HOST="${MODEL_HOST:-127.0.0.1}"
     -ngl 99 \
     -fa on \
     --port 8000 \
-    --n-cpu-moe 20 \
+    --n-cpu-moe 25 \
     --host "$HOST" \
-    --batch-size 4096 \
-    --ubatch-size 4096 \
     --ctx-size 131072 \
     --alias "unsloth/Qwen3-Coder-Next" \
     --temp 1.0 \
@@ -17,8 +15,6 @@ HOST="${MODEL_HOST:-127.0.0.1}"
     --top-k 40 \
     --cache-type-k q8_0 \
     --cache-type-v q8_0 \
-    --no-mmap \
     --threads 16 \
     --jinja \
-    --threads-batch 16 \
     --parallel 1 
