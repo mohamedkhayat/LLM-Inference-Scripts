@@ -7,10 +7,8 @@ MODEL_PORT="${MODEL_PORT:-8000}"
     -fa on \
     --port "$MODEL_PORT" \
     --host "$HOST" \
-    --ctx-size 131072 \
+    --ctx-size 262144 \
     --context-shift \
-    --ubatch-size 4096 \
-    --batch-size 4096 \
     --temp 0.6 \
     --top-p 0.95 \
     --top-k 20 \
