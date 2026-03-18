@@ -2,18 +2,19 @@
 
 source ~/.venv/vllm/bin/activate
 HOST="${MODEL_HOST:-127.0.0.1}" 
+MODEL_PORT="${MODEL_PORT:-8000}"
 
 vllm serve Qwen/Qwen3.5-4B\
     --host "$HOST" \
-    --max-model-len 120K \
-    --gpu-memory-utilization 0.8 \
+    --max-model-len 64K \
+    --gpu-memory-utilization 0.4 \
     --mm-encoder-tp-mode data \
     --mm-processor-cache-type shm \
     --reasoning-parser qwen3 \
     --enable-auto-tool-choice \
     --enable-prefix-caching \
     --tool-call-parser qwen3_coder \
-    --port 8000 \
+    --port "$MODEL_PORT" \
     --default-chat-template-kwargs '{"enable_thinking": false}' \
     --max-num-seqs 4 \
     --override-generation-config '{

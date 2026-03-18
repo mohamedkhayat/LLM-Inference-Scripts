@@ -3,6 +3,7 @@
 source ~/.venv/vllm/bin/activate
 
 HOST="${MODEL_HOST:-127.0.0.1}" 
+MODEL_PORT="${MODEL_PORT:-8000}"
 
 vllm serve Qwen/Qwen3-4B-Instruct-2507\
     --host "$HOST" \
@@ -10,4 +11,4 @@ vllm serve Qwen/Qwen3-4B-Instruct-2507\
     --gpu-memory-utilization 0.8 \
     --tool-call-parser hermes \
     --enable-auto-tool-choice \
-    --port 8000
+    --port "$MODEL_PORT"

@@ -1,10 +1,11 @@
 #!/bin/bash
 HOST="${MODEL_HOST:-127.0.0.1}" 
+MODEL_PORT="${MODEL_PORT:-8000}"
 ~/Apps/llama.cpp/build/bin/llama-server -m ~/models/GLM4.7flash/GLM-4.7-Flash-UD-Q4_K_XL.gguf \
     --jinja \
     -ngl 99 \
     -fa on \
-    --port 8000 \
+    --port "$MODEL_PORT" \
     --host "$HOST" \
     --ctx-size 262144 \
     --temp 0.7 \

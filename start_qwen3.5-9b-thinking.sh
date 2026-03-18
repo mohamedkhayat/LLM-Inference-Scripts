@@ -1,7 +1,8 @@
 #!/bin/bash
 
 source ~/.venv/vllm/bin/activate
-HOST="${MODEL_HOST:-127.0.0.1}" 
+HOST="${MODEL_HOST:-127.0.0.1}"
+MODEL_PORT="${MODEL_PORT:-8000}"
 
 vllm serve Qwen/Qwen3.5-9B\
     --host "$HOST" \
@@ -13,7 +14,7 @@ vllm serve Qwen/Qwen3.5-9B\
     --enable-auto-tool-choice \
     --enable-prefix-caching \
     --tool-call-parser qwen3_coder \
-    --port 8000 \
+    --port "$MODEL_PORT" \
     --max-num-seqs 4 \
     --override-generation-config '{
         "temperature": 1.0,

@@ -1,9 +1,10 @@
 #!/bin/bash
 HOST="${MODEL_HOST:-127.0.0.1}" 
+MODEL_PORT="${MODEL_PORT:-8000}"
 ~/Apps/llama.cpp/build/bin/llama-server -m ~/models/Qwen-3-Coder-Next/Qwen3-Coder-Next-UD-Q4_K_XL.gguf \
     -ngl 99 \
     -fa on \
-    --port 8000 \
+    --port "$MODEL_PORT" \
     --n-cpu-moe 25 \
     --host "$HOST" \
     --ctx-size 131072 \
