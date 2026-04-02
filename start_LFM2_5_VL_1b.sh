@@ -1,4 +1,13 @@
 #!/bin/bash
+# Kill any lingering llama-server instances
+pkill -f 'llama-server' 2>/dev/null || true
+# Wait for VRAM to be released by previous model
+while true; do
+    free_mb=$(nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits | head -1)
+    [ "$free_mb" -gt 20000 ] && break
+    echo "Waiting for VRAM... ${free_mb}MB free"
+    sleep 2
+done
 
 source ~/.venv/vllm/bin/activate
 

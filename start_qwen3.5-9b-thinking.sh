@@ -1,25 +1,32 @@
 #!/bin/bash
+# Kill any lingering llama-server instances
+pkill -f 'llama-server' 2>/dev/null || true
+# Wait for VRAM to be released by previous model
+while true; do
+    free_mb=$(nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits | head -1)
+    [ "$free_mb" -gt 20000 ] && break
+    echo "Waiting for VRAM... ${free_mb}MB free"
+    sleep 2
+done
 
 source ~/.venv/vllm/bin/activate
 HOST="${MODEL_HOST:-127.0.0.1}"
 MODEL_PORT="${MODEL_PORT:-8000}"
 
-vllm serve Qwen/Qwen3.5-9B\
-    --host "$HOST" \
-    --max-model-len 120K \
-    --gpu-memory-utilization 0.8 \
-    --mm-encoder-tp-mode data \
-    --mm-processor-cache-type shm \
-    --reasoning-parser qwen3 \
-    --enable-auto-tool-choice \
-    --enable-prefix-caching \
-    --tool-call-parser qwen3_coder \
+~/Apps/llama.cpp/build/bin/llama-server -m ~/models/Qwen3.5-9B/Qwen3.5-9B-UD-Q4_K_XL.gguf \
+    --mmproj ~/models/Qwen3.5-9B/mmproj-BF16.gguf \
+    -ngl 99 \
+    -fa on \
     --port "$MODEL_PORT" \
-    --max-num-seqs 4 \
-    --override-generation-config '{
-        "temperature": 1.0,
-        "top_p": 0.95,
-        "top_k": 20,
-        "presence_penalty": 1.5,
-        "repetition_penalty": 1.0
-    }'
+    --host "$HOST" \
+    --ctx-size 262144 \
+    --context-shift \
+    --temp 0.6 \
+    --top-p 0.95 \
+    --top-k 20 \
+    --min-p 0.05 \
+    --jinja \
+    --cache-type-k q8_0 \
+    --cache-type-v q8_0 \
+    --threads 16 \
+    --parallel 1

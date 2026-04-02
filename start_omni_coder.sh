@@ -10,20 +10,21 @@ while true; do
 done
 HOST="${MODEL_HOST:-127.0.0.1}" 
 MODEL_PORT="${MODEL_PORT:-8000}"
-~/Apps/llama.cpp/build/bin/llama-server -m ~/models/GLM4.7flash/GLM-4.7-Flash-UD-Q4_K_XL.gguf \
+~/Apps/llama.cpp/build/bin/llama-server --hf-repo Tesslate/OmniCoder-9B-GGUF --hf-file ~/models/OmniCoder/omnicoder-9b-q8_0.gguf \
     -ngl 99 \
     -fa on \
     --port "$MODEL_PORT" \
     --host "$HOST" \
     --ctx-size 262144 \
-    --temp 0.7 \
-    --top-p 1.0 \
-    --repeat-penalty 1.0 \
-    --min-p 0.01 \
+    --context-shift \
+    --temp 0.6 \
+    --top-p 0.95 \
+    --top-k 20 \
+    --min-p 0.05 \
+    --jinja \
     --cache-type-k q8_0 \
     --cache-type-v q8_0 \
-    --context-shift \
-    --batch-size 2048 \
-    --ubatch-size 1024 \
     --threads 16 \
-    --parallel 1
+    --parallel 1 \
+    --alias  OmniCoder \
+    --jinja

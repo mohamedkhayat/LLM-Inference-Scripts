@@ -1,0 +1,183 @@
+healthCheckTimeout: 180
+logLevel: info
+sendLoadingState: true
+startPort: 10001
+macros:
+  scripts_dir: ${env.HOME}/scripts
+  model_host: 172.17.0.1
+models:
+  glm4.7flash-general:
+    proxy: http://172.17.0.1:${PORT}
+    cmd: env MODEL_HOST=${model_host} MODEL_PORT=${PORT} bash ${scripts_dir}/start_glm4.7flash-general.sh
+    env:
+    - MODEL_PORT=${PORT}
+    - MODEL_HOST=${model_host}
+    ttl: 900
+    aliases:
+    - glm4
+    - glm4-general
+  glm4.7flash-tools:
+    proxy: http://172.17.0.1:${PORT}
+    cmd: env MODEL_HOST=${model_host} MODEL_PORT=${PORT} bash ${scripts_dir}/start_glm4.7flash-tool-calling.sh
+    env:
+    - MODEL_PORT=${PORT}
+    - MODEL_HOST=${model_host}
+    ttl: 900
+    aliases:
+    - glm4-tools
+  nanbeige4.1-3b:
+    proxy: http://172.17.0.1:${PORT}
+    cmd: env MODEL_HOST=${model_host} MODEL_PORT=${PORT} bash ${scripts_dir}/start_nanbeige4.1-3b.sh
+    env:
+    - MODEL_PORT=${PORT}
+    - MODEL_HOST=${model_host}
+    ttl: 900
+    aliases:
+    - nanbeige
+  
+  mirothinker:
+    proxy: http://172.17.0.1:${PORT}
+    cmd: env MODEL_HOST=${model_host} MODEL_PORT=${PORT} bash ${scripts_dir}/start_mirothinker.sh
+    env:
+    - MODEL_PORT=${PORT}
+    - MODEL_HOST=${model_host}
+    ttl: 1800
+    aliases:
+    - mirothinker
+  qwen3-coder-next:
+    proxy: http://172.17.0.1:${PORT}
+    cmd: env MODEL_HOST=${model_host} MODEL_PORT=${PORT} bash ${scripts_dir}/start_qwen3-coder-next.sh
+    env:
+    - MODEL_PORT=${PORT}
+    - MODEL_HOST=${model_host}
+    ttl: 900
+    aliases:
+    - coder
+    - qwen3-coder
+  qwen3.5-27b-thinking:
+    proxy: http://172.17.0.1:${PORT}
+    cmd: env MODEL_HOST=${model_host} MODEL_PORT=${PORT} bash ${scripts_dir}/start_qwen3.5-27b-thinking.sh
+    env:
+    - MODEL_PORT=${PORT}
+    - MODEL_HOST=${model_host}
+    ttl: 900
+    aliases:
+    - qwen27b-think
+  OmniCoder:
+    proxy: http://172.17.0.1:${PORT}
+    cmd: env MODEL_HOST=${model_host} MODEL_PORT=${PORT} bash ${scripts_dir}/start_qwen3.5-27b-non-thinking.sh
+    env:
+    - MODEL_PORT=${PORT}
+    - MODEL_HOST=${model_host}
+    ttl: 900
+    aliases:
+    - OmniCoder
+  qwen3.5-35b-thinking:
+    proxy: http://172.17.0.1:${PORT}
+    cmd: env MODEL_HOST=${model_host} MODEL_PORT=${PORT} bash ${scripts_dir}/start_qwen3.5-35b-thinking.sh
+    env:
+    - MODEL_PORT=${PORT}
+    - MODEL_HOST=${model_host}
+    ttl: 900
+    aliases:
+    - qwen35b-think
+  qwen3.5-35b-no-think:
+    proxy: http://172.17.0.1:${PORT}
+    cmd: env MODEL_HOST=${model_host} MODEL_PORT=${PORT} bash ${scripts_dir}/start_qwen3.5-35b-non-thinking.sh
+    env:
+    - MODEL_PORT=${PORT}
+    - MODEL_HOST=${model_host}
+    ttl: 900
+    aliases:
+    - qwen35b
+  lfm2.5-1b:
+    proxy: http://172.17.0.1:${PORT}
+    cmd: env MODEL_HOST=${model_host} MODEL_PORT=${PORT} bash ${scripts_dir}/start_LFM2_5_1b.sh
+    env:
+    - MODEL_PORT=${PORT}
+    - MODEL_HOST=${model_host}
+    ttl: 900
+    aliases:
+    - lfm2.5
+  lfm2.5-vl:
+    proxy: http://172.17.0.1:${PORT}
+    cmd: env MODEL_HOST=${model_host} MODEL_PORT=${PORT} bash ${scripts_dir}/start_LFM2_5_VL_1b.sh
+    env:
+    - MODEL_PORT=${PORT}
+    - MODEL_HOST=${model_host}
+    ttl: 900
+    aliases:
+    - lfm-vision
+  qwen3.5-4b-thinking:
+    proxy: http://172.17.0.1:${PORT}
+    cmd: env MODEL_HOST=${model_host} MODEL_PORT=${PORT} bash ${scripts_dir}/start_qwen3.5-4b-thinking.sh
+    env:
+    - MODEL_PORT=${PORT}
+    - MODEL_HOST=${model_host}
+    ttl: 900
+    aliases:
+    - qwen4b-think
+  qwen3.5-4b-no-think:
+    proxy: http://172.17.0.1:${PORT}
+    cmd: env MODEL_HOST=${model_host} MODEL_PORT=${PORT} bash ${scripts_dir}/start_qwen3.5-4b-non-thinking.sh
+    env:
+    - MODEL_PORT=${PORT}
+    - MODEL_HOST=${model_host}
+    ttl: 900
+    aliases:
+    - qwen4b
+  qwen3.5-9b-thinking:
+    proxy: http://172.17.0.1:${PORT}
+    cmd: env MODEL_HOST=${model_host} MODEL_PORT=${PORT} bash ${scripts_dir}/start_qwen3.5-9b-thinking.sh
+    env:
+    - MODEL_PORT=${PORT}
+    - MODEL_HOST=${model_host}
+    ttl: 900
+    aliases:
+    - qwen9b-think
+  qwen3.5-9b-no-think:
+    proxy: http://172.17.0.1:${PORT}
+    cmd: env MODEL_HOST=${model_host} MODEL_PORT=${PORT} bash ${scripts_dir}/start_qwen3.5-9b-non-thinking.sh
+    env:
+    - MODEL_PORT=${PORT}
+    - MODEL_HOST=${model_host}
+    ttl: 900
+    aliases:
+    - qwen9b
+  qwen3-4b:
+    proxy: http://172.17.0.1:${PORT}
+    cmd: env MODEL_HOST=${model_host} MODEL_PORT=${PORT} bash ${scripts_dir}/start_qwen3_4b.sh
+    env:
+    - MODEL_PORT=${PORT}
+    - MODEL_HOST=${model_host}
+    ttl: 900
+    aliases:
+    - qwen3-4b-instruct
+groups:
+  qwen27b:
+    swap: true
+    exclusive: true
+    members:
+    - qwen3.5-27b-thinking
+    - qwen3.5-27b-no-think
+  qwen35b:
+    swap: true
+    exclusive: true
+    members:
+    - qwen3.5-35b-thinking
+    - qwen3.5-35b-no-think
+  qwen4b:
+    swap: true
+    exclusive: true
+    members:
+    - qwen3.5-4b-thinking
+    - qwen3.5-4b-no-think
+  qwen9b:
+    swap: true
+    exclusive: true
+    members:
+    - qwen3.5-9b-thinking
+    - qwen3.5-9b-no-think
+hooks:
+  on_startup:
+    preload: []
