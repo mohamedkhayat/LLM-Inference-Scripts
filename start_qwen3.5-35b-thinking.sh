@@ -21,7 +21,7 @@ MODEL_PORT="${MODEL_PORT:-8000}"
     --temp 0.6 \
     --top-p 0.95 \
     --top-k 20 \
-    --min-p 0.05 \
+    --min-p 0.00 \
     --jinja \
     --cache-type-k q8_0 \
     --cache-type-v q8_0 \
