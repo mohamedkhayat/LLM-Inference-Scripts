@@ -10,7 +10,7 @@ while true; do
 done
 HOST="${MODEL_HOST:-127.0.0.1}" 
 MODEL_PORT="${MODEL_PORT:-8000}"
-~/Apps/llama.cpp/build/bin/llama-server -m ~/models/Gemma4-31B/gemma-4-31B-it-UD-Q5_K_XL.gguf \
+~/Apps/llama.cpp/build/bin/llama-server -m ~/models/Gemma4-31B/gemma-4-31B-it-UD-Q4_K_XL.gguf \
     --mmproj ~/models/Gemma4-31B/mmproj-BF16.gguf \
     -ngl 99 \
     -fa on \
