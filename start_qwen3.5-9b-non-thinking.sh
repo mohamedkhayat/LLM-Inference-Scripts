@@ -12,19 +12,22 @@ done
 source ~/.venv/vllm/bin/activate
 HOST="${MODEL_HOST:-127.0.0.1}" 
 MODEL_PORT="${MODEL_PORT:-8000}"
-~/Apps/llama.cpp/build/bin/llama-server -m ~/models/Qwen3.5-9B/Qwen3.5-9B-UD-Q4_K_XL.gguf \
-    --mmproj ~/models/Qwen3.5-9B/mmproj-BF16.gguf \
-    -ngl 99 \
-    -fa on \
-    --port "$MODEL_PORT" \
+
+vllm serve Qwen/Qwen3.5-9B\
     --host "$HOST" \
-    --context-shift \
-    --ctx-size  262144 \
-    --temp 0.7 \
-    --top-p 0.8 \
-    --top-k 20 \
-    --min-p 0.05 \
-    --cache-type-k q8_0 \
-    --cache-type-v q8_0 \
-    --jinja \
-    --chat-template-kwargs "{\"enable_thinking\": false}"
+    --max-model-len 120K \
+    --gpu-memory-utilization 0.8 \
+    --enable-auto-tool-choice \
+    --enable-prefix-caching \
+    --tool-call-parser qwen3_coder \
+    --default-chat-template-kwargs '{"enable_thinking": false}' \
+    --port "$MODEL_PORT" \
+    --max-num-seqs 4 \
+    --override-generation-config '{
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "min_p" : 0.05,
+        "presence_penalty": 1.5,
+        "repetition_penalty": 1.0
+    }'

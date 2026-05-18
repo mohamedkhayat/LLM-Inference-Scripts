@@ -17,6 +17,7 @@ MODEL_PORT="${MODEL_PORT:-8000}"
     --port "$MODEL_PORT" \
     --host "$HOST" \
     --ctx-size 131072 \
+    --spec-type ngram-mod --spec-ngram-mod-n-match 24 --spec-ngram-mod-n-min 12 --spec-ngram-mod-n-max 48 \
     --context-shift \
     --temp 1.0 \
     --top-p 0.95 \
@@ -25,6 +26,5 @@ MODEL_PORT="${MODEL_PORT:-8000}"
     --jinja \
     --cache-type-k q8_0 \
     --cache-type-v q8_0 \
-    --threads 16 \
     --parallel 1 \
     --alias  Gemma4-31b

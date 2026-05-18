@@ -17,6 +17,7 @@ MODEL_PORT="${MODEL_PORT:-8000}"
     --port "$MODEL_PORT" \
     --host "$HOST" \
     --ctx-size 262144 \
+    --spec-type ngram-mod --spec-ngram-mod-n-match 24 --spec-ngram-mod-n-min 12 --spec-ngram-mod-n-max 48 \
     --context-shift \
     --temp 0.6 \
     --top-p 0.95 \
@@ -25,7 +26,6 @@ MODEL_PORT="${MODEL_PORT:-8000}"
     --jinja \
     --cache-type-k q8_0 \
     --cache-type-v q8_0 \
-    --threads 16 \
     --parallel 1 \
     --alias  Qwen3.6-27B \
     --chat-template-kwargs "{\"preserve_thinking\": true}"

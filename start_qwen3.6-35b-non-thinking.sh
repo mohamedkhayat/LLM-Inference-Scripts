@@ -16,15 +16,14 @@ MODEL_PORT="${MODEL_PORT:-8000}"
     -fa on \
     --port "$MODEL_PORT" \
     --host "$HOST" \
-    --ctx-size 262144 \
-    --context-shift \
     --spec-type ngram-mod --spec-ngram-mod-n-match 24 --spec-ngram-mod-n-min 12 --spec-ngram-mod-n-max 48 \
-    --temp 0.6 \
-    --top-p 0.95 \
+    --context-shift \
+    --ctx-size  262144 \
+    --temp 0.7 \
+    --top-p 0.8 \
     --top-k 20 \
     --min-p 0.00 \
     --cache-type-k q8_0 \
     --cache-type-v q8_0 \
     --jinja \
-    --parallel 1 \
-    --chat-template-kwargs "{\"preserve_thinking\": true}"
+    --chat-template-kwargs "{\"enable_thinking\": false}"
