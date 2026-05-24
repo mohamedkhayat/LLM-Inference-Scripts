@@ -16,7 +16,6 @@ MODEL_PORT="${MODEL_PORT:-8000}"
     -fa on \
     --port "$MODEL_PORT" \
     --host "$HOST" \
-    --spec-type ngram-mod --spec-ngram-mod-n-match 24 --spec-ngram-mod-n-min 12 --spec-ngram-mod-n-max 48 \
     --context-shift \
     --ctx-size  262144 \
     --temp 0.7 \

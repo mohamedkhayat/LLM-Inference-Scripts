@@ -10,8 +10,8 @@ while true; do
 done
 HOST="${MODEL_HOST:-127.0.0.1}" 
 MODEL_PORT="${MODEL_PORT:-8000}"
-~/Apps/llama.cpp/build/bin/llama-server -m ~/models/Qwen3.5-27B/Qwen3.5-27B-UD-Q4_K_XL.gguf \
-    --mmproj ~/models/Qwen3.5-27B/mmproj-BF16.gguf \
+~/Apps/llama.cpp/build/bin/llama-server -m ~/models/Qwen3.5-27B-MTP/Qwen3.5-27B-UD-Q4_K_XL.gguf \
+    --mmproj ~/models/Qwen3.5-27B-MTP/mmproj-BF16.gguf \
     -ngl 99 \
     -fa on \
     --port "$MODEL_PORT" \
@@ -20,6 +20,7 @@ MODEL_PORT="${MODEL_PORT:-8000}"
     --ctx-size  262144 \
     --temp 0.7 \
     --top-p 0.8 \
+    --spec-type draft-mtp --spec-draft-n-max 2 \
     --top-k 20 \
     --min-p 0.00 \
     --cache-type-k q8_0 \

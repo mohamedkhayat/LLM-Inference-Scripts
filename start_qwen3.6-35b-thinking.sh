@@ -18,7 +18,6 @@ MODEL_PORT="${MODEL_PORT:-8000}"
     --host "$HOST" \
     --ctx-size 262144 \
     --context-shift \
-    --spec-type ngram-mod --spec-ngram-mod-n-match 24 --spec-ngram-mod-n-min 12 --spec-ngram-mod-n-max 48 \
     --temp 0.6 \
     --top-p 0.95 \
     --top-k 20 \
