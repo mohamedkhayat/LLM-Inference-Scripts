@@ -3,28 +3,31 @@
 pkill -f 'llama-server' 2>/dev/null || true
 # Wait for VRAM to be released by previous model
 while true; do
-    free_mb=$(nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits | head -1)
-    [ "$free_mb" -gt 20000 ] && break
-    echo "Waiting for VRAM... ${free_mb}MB free"
-    sleep 2
+  free_mb=$(nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits | head -1)
+  [ "$free_mb" -gt 20000 ] && break
+  echo "Waiting for VRAM... ${free_mb}MB free"
+  sleep 2
 done
-HOST="${MODEL_HOST:-127.0.0.1}" 
+HOST="${MODEL_HOST:-127.0.0.1}"
 MODEL_PORT="${MODEL_PORT:-8000}"
-~/Apps/llama.cpp/build/bin/llama-server -m ~/models/Gemma4-31B/gemma-4-31B-it-UD-Q4_K_XL.gguf \
-    --mmproj ~/models/Gemma4-31B/mmproj-BF16.gguf \
-    -ngl 99 \
-    -fa on \
-    --port "$MODEL_PORT" \
-    --host "$HOST" \
-    --ctx-size 131072 \
-    --spec-type ngram-mod --spec-ngram-mod-n-match 24 --spec-ngram-mod-n-min 12 --spec-ngram-mod-n-max 48 \
-    --context-shift \
-    --temp 1.0 \
-    --top-p 0.95 \
-    --top-k 64 \
-    --min-p 0.00 \
-    --jinja \
-    --cache-type-k q8_0 \
-    --cache-type-v q8_0 \
-    --parallel 1 \
-    --alias  Gemma4-31b
+~/Apps/llama.cpp/build/bin/llama-server -m ~/models/Gemma4-31B-MTP/gemma-4-31B-it-qat-UD-Q4_K_XL.gguf \
+  --mmproj ~/models/Gemma4-31B-MTP/mmproj-BF16.gguf \
+  --model-draft ~/models/Gemma4-31B-MTP/mtp-gemma-4-31B-it.gguf \
+  -ngl 99 \
+  -fa on \
+  --port "$MODEL_PORT" \
+  --host "$HOST" \
+  --ctx-size 131072 \
+  --spec-type draft-mtp --spec-draft-n-max 2 \
+  --context-shift \
+  --temp 1.0 \
+  --top-p 0.95 \
+  --top-k 64 \
+  --min-p 0.00 \
+  --jinja \
+  --cache-type-k q8_0 \
+  --cache-type-v q8_0 \
+  --parallel 1 \
+  --alias Gemma4-31b \
+  --chat-template-kwargs '{"enable_thinking":true}'
+

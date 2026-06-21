@@ -10,22 +10,23 @@ while true; do
 done
 HOST="${MODEL_HOST:-127.0.0.1}"
 MODEL_PORT="${MODEL_PORT:-8000}"
-~/Apps/llama.cpp/build/bin/llama-server -m ~/models/Qwen3.6-27B-MTP/Qwen3.6-27B-UD-Q4_K_XL.gguf \
-  --mmproj ~/models/Qwen3.6-27B-MTP/mmproj-BF16.gguf \
+~/Apps/llama.cpp/build/bin/llama-server -m ~/models/Gemma4-31B-MTP/gemma-4-31B-it-qat-UD-Q4_K_XL.gguf \
+  --mmproj ~/models/Gemma4-31B-MTP/mmproj-BF16.gguf \
+  --model-draft ~/models/Gemma4-31B-MTP/mtp-gemma-4-31B-it.gguf \
   -ngl 99 \
   -fa on \
   --port "$MODEL_PORT" \
   --host "$HOST" \
-  --context-shift \
   --ctx-size 131072 \
-  --temp 0.7 \
-  --top-p 0.8 \
   --spec-type draft-mtp --spec-draft-n-max 2 \
-  --top-k 20 \
+  --context-shift \
+  --temp 1.0 \
+  --top-p 0.95 \
+  --top-k 64 \
   --min-p 0.00 \
+  --jinja \
   --cache-type-k q8_0 \
   --cache-type-v q8_0 \
-  --jinja \
-  --parallel 2 \
-  --chat-template-kwargs "{\"enable_thinking\": false}"
-
+  --parallel 1 \
+  --alias Gemma4-31b \
+  --chat-template-kwargs '{"enable_thinking":false}'

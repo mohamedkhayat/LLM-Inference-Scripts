@@ -11,7 +11,7 @@ done
 HOST="${MODEL_HOST:-127.0.0.1}" 
 MODEL_PORT="${MODEL_PORT:-8000}"
 ~/Apps/llama.cpp/build/bin/llama-server -m ~/models/Qwen3.6-35B-A3B/Qwen3.6-35B-A3B-UD-Q4_K_XL.gguf \
-    --mmproj ~/models/Qwen3.6-35B-A3B/mmproj-BF16.gguf \
+  --mmproj ~/models/Qwen3.6-35B-A3B/mmproj-BF16.gguf \
     -ngl 99 \
     -fa on \
     --port "$MODEL_PORT" \
@@ -20,9 +20,11 @@ MODEL_PORT="${MODEL_PORT:-8000}"
     --ctx-size  262144 \
     --temp 0.7 \
     --top-p 0.8 \
+    --spec-type draft-mtp --spec-draft-n-max 2 \
     --top-k 20 \
     --min-p 0.00 \
     --cache-type-k q8_0 \
     --cache-type-v q8_0 \
+    --parallel 1 \
     --jinja \
     --chat-template-kwargs "{\"enable_thinking\": false}"
